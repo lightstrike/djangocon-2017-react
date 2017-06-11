@@ -163,3 +163,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Editors
+*.sw*
