@@ -99,6 +99,10 @@ ENV/
 # mypy
 .mypy_cache/
 
+# Databases
+*.sqlite*
+*.db*
+
 # Node.gitignore
 # Logs
 logs
