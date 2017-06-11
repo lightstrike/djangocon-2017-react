@@ -1,0 +1,30 @@
+{
+  "name": "djangocon-2017-react",
+  "version": "1.0.0",
+  "description": "...in conjunction with the tutorial Geoff and Jack are giving (gave?) at DjangoCon US 2017 (https://2017.djangocon.us/)",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lightstrike/djangocon-2017-react.git"
+  },
+  "author": "Geoffrey Sechter and Jack McCloy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lightstrike/djangocon-2017-react/issues"
+  },
+  "homepage": "https://github.com/lightstrike/djangocon-2017-react#readme",
+  "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
