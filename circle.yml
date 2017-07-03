@@ -1,0 +1,23 @@
+dependencies:
+    pre:
+        - cd /opt/circleci/.pyenv; git pull
+machine:
+  python:
+    version: 3.6.1
+  node:
+    version: 6.11.0
+
+database:
+  override:
+    - createuser -s -d djangoconreact
+    - createdb djangoconreact
+
+test:
+  override:
+    - npm rebuild node-sass
+    - webpack --config webpack/base.config.js
+    - flake8
+    - dropdb djangoconreact
+    - coverage run manage.py test
+  post:
+    - coverage html --omit '*virtualenvs*' -d $CIRCLE_ARTIFACTS
