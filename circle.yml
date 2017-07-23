@@ -1,6 +1,6 @@
 dependencies:
     pre:
-        - cd /opt/circleci/.pyenv; git pull
+        - cd /opt/circleci/.pyenv/plugins/python-build/../.. && git pull && cd -
         - pip install -r requirements-dev.txt
 machine:
   python:
