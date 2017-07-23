@@ -16,7 +16,7 @@ database:
 test:
   override:
     - npm rebuild node-sass
-    - webpack --config webpack.config.js
+    # - webpack --config webpack.config.js
     - flake8
     - dropdb djangoconreact
     - coverage run manage.py test
