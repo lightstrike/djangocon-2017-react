@@ -1,6 +1,7 @@
 // @flow
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -28,6 +29,12 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './website/index-template.html',
+      files: {
+        js: ['[name].bundle.js'],
+      },
+    }),
   ],
   devServer: {
     contentBase: './build',
