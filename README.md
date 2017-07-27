@@ -13,6 +13,7 @@
         - stateful
             - HomePage.jsx
             - TalkPage.jsx
+            - Header.jsx
         - stateless
             - VoteCountDisplay.jsx (since it inherits from Row or Page)
             - VoteArrow.jsx
