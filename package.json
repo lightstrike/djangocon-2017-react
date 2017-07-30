@@ -4,7 +4,7 @@
   "description": "...in conjunction with the tutorial Geoff and Jack are giving (gave?) at DjangoCon US 2017 (https://2017.djangocon.us/)",
   "scripts": {
     "start": "webpack-dev-server",
-    "lint": "eslint --config=.eslintrc.json website/*",
+    "lint": "eslint ./ --ext .jsx,.js",
     "test": "jest"
   },
   "repository": {
