@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const propTypes = {
-  talks: PropTypes.Array.isRequired,
+  talks: PropTypes.array.isRequired,
 };
 
 const defaultProps = {
@@ -12,7 +12,7 @@ const defaultProps = {
 
 function TalksList({ talks }) {
   const talkRows = talks.map(talk =>
-    <div>
+    <div key={talk.id.toString()}>
       <Link to={`${talk.id}`}>
         <h2>{talk.title}</h2>
       </Link>

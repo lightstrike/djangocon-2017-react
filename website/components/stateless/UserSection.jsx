@@ -8,7 +8,7 @@ const propTypes = {
 
 const defaultProps = {
   isLoggedIn: false,
-  user: undefined,
+  user: null,
 };
 
 function UserSection({ isLoggedIn, user }) {
