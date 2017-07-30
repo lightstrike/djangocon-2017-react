@@ -19,6 +19,7 @@ const defaultState = {
   byId: {},
   loading: 0,
   updating: 0,
+  self: null,
 };
 export function reducer(state = defaultState, action) {
   switch (action.type) {
@@ -35,6 +36,15 @@ export function reducer(state = defaultState, action) {
     }
     case RECEIVE_USER: {
       const payload = action.payload;
+      if (payload.requestingSelf) {
+        return Object.assign({}, state, {
+          byId: {
+            ...state.byId,
+            ...payload.user,
+          },
+          self: payload.user.id,
+        });
+      }
       return Object.assign({}, state, {
         byId: {
           ...state.byId,
@@ -78,7 +88,7 @@ function getUserFailure(userId, status) {
   };
 }
 
-function receiveUser(user) {
+function receiveUser(user, requestingSelf) {
   // step 1: ensure the incoming object follows js ideoms (camelCase keys and such)
   const reduxUser = apiToReduxFormat(user);
 
@@ -90,6 +100,7 @@ function receiveUser(user) {
     type: RECEIVE_USER,
     payload: {
       ...normalizedUser.entities,
+      requestingSelf,
     },
   };
 }
@@ -108,12 +119,15 @@ export function getUser(userId, forceRequest = false) {
       return null;
     }
     dispatch(getUserRequest(userId));
-    return get(`api/v1/user/${userId}/`)
+    // if the userId is 'me', we know that the user in the response is the
+    // authenticated user
+    const requestingSelf = (userId === 'me');
+    return get(`api/v1/users/${userId}/`)
       .then((response) => {
         if (response.status === 200) {
           // 200 response - everything works as expected
           response.json()
-            .then(json => dispatch(receiveUser(json)))
+            .then(json => dispatch(receiveUser(json, requestingSelf)))
             .then(() => dispatch(getUserSuccess(userId)));
         } else {
           // not a 200 response
