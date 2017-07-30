@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header heading="Django Talks" />
+          <Header heading="Great Django Talks" />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/:slug" component={TalkPage} />

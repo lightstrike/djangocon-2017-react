@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 import UserSection from 'website/components/stateless/UserSection';
 
@@ -23,7 +24,9 @@ class Header extends Component {
     render() {
         return (
             <nav>
-              <h3>{this.heading}</h3>
+              <Link to='/'>
+                <h3>{this.props.heading}</h3>
+              </Link>
               <UserSection isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
             </nav>
         );
