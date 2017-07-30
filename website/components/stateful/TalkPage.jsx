@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
 import talksData from 'website/mocks/talks.json';
+import TalkDetails from 'website/components/stateless/TalkDetails';
+import TalkOverview from 'website/components/stateless/TalkOverview';
+import VoteCountDisplay from 'website/components/stateless/VoteCountDisplay';
 
 class TalkPage extends Component {
   constructor(props) {
@@ -12,10 +16,12 @@ class TalkPage extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.talk.title}</h1>
-        <h3>{this.state.talk.speaker_name}</h3>
-        <h4>{this.state.talk.date}</h4>
-        <p>{this.state.talk.description}</p>
+        <TalkOverview talk={this.state.talk} />
+        <TalkDetails
+          description={this.state.talk.description}
+          videoUrl={this.state.talk.videoUrl}
+        />
+        <VoteCountDisplay tally={this.state.talk.voteTally} userChoice={this.state.talk.userVote} />
       </div>
     );
   }

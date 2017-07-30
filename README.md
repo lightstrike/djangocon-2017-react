@@ -15,9 +15,21 @@
             - TalkPage.jsx
             - Header.jsx
         - stateless
-            - VoteCountDisplay.jsx (since it inherits from Row or Page)
-            - VoteArrow.jsx
-            - VoteTally.jsx
+            - TalkRow.jsx
+              - TalkOverview.jsx
+              - VoteCountDisplay.jsx (since it inherits from Row or Page)
+                - VoteArrow.jsx
+                - VoteTally.jsx
+              - CommentCountDisplay.jsx
+            - TalkDetails.jsx
+              - TalkOverview.jsx
+              - VoteCountDisplay.jsx
+              - CommentCountDisplay.jsx
+              - TalkVideo.jsx
+              - TalkDescription.jsx
+            - CommentList.jsx
+              - CommentItem.jsx
+              - CommentForm.jsx
     - redux
         - index.js
         - talks.js (includes action_constants, reducer, normal action creators, async action creators)

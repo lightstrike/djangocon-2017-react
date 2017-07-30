@@ -6,7 +6,10 @@
         "date": "2014-12-29",
         "description": "It's great",
         "created": "2017-07-23T02:11:17.787178Z",
-        "modified": "2017-07-23T02:11:17.787211Z"
+        "modified": "2017-07-23T02:11:17.787211Z",
+        "userVote": "+1",
+        "videoUrl": "https://www.youtube.com/embed/OSGv2VnC0go",
+        "voteTally": "13"
     },
     {
         "id": 2,
@@ -15,6 +18,9 @@
         "date": "2016-11-29",
         "description": "Don't do it",
         "created": "2017-07-23T02:11:56.161021Z",
-        "modified": "2017-07-23T02:11:56.161065Z"
+        "modified": "2017-07-23T02:11:56.161065Z",
+        "userVote": null,
+        "videoUrl": "https://www.youtube.com/embed/OSGv2VnC0go",
+        "voteTally": "8"
     }
 ]

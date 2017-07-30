@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+
+import TalkRow from 'website/components/stateless/TalkRow';
 
 const propTypes = {
   talks: PropTypes.array.isRequired,
@@ -12,13 +13,7 @@ const defaultProps = {
 
 function TalksList({ talks }) {
   const talkRows = talks.map(talk =>
-    <div key={talk.id.toString()}>
-      <Link to={`${talk.id}`}>
-        <h2>{talk.title}</h2>
-      </Link>
-      <h3>{talk.speaker_name}</h3>
-      <h4>{talk.date}</h4>
-    </div>,
+    <TalkRow key={talk.id.toString()} talk={talk} />,
   );
 
   return (
