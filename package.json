@@ -4,6 +4,7 @@
   "description": "...in conjunction with the tutorial Geoff and Jack are giving (gave?) at DjangoCon US 2017 (https://2017.djangocon.us/)",
   "scripts": {
     "start": "webpack-dev-server",
+    "lint": "eslint --config=.eslintrc.json website/*",
     "test": "jest"
   },
   "repository": {
@@ -33,6 +34,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "html-webpack-plugin": "^2.29.0",
+    "prop-types": "^15.5.10",
     "react-hot-loader": "^3.0.0-beta.7",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
