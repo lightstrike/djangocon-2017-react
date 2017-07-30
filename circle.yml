@@ -2,6 +2,8 @@ dependencies:
     pre:
         - cd /opt/circleci/.pyenv; git pull
         - pip install -r requirements-dev.txt
+    override:
+        - cd website && npm install
 machine:
   python:
     version: 3.6.1
@@ -15,8 +17,7 @@ database:
 
 test:
   override:
-    - npm rebuild node-sass
-    # - webpack --config webpack.config.js
+    - npm run lint
     - flake8
     - dropdb djangoconreact
     - coverage run manage.py test
