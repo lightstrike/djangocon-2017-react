@@ -1,35 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const propTypes = {
-    isLoggedIn: PropTypes.bool,
-    user: PropTypes.object, 
-}
-
-const defaultProps = {
-    isLoggedIn: false,
-    user: undefined, 
+  isLoggedIn: PropTypes.bool,
+  user: PropTypes.object,
 };
 
-function UserSection({ isLoggedIn, user, ...props }) {
-    return (
-        <section>
-            {user && 
-              <span>Hi {user}</span>
-            }
-            {isLoggedIn ? (
-              <buttons>
-                <button>Add Talk</button>
-                <button>Logout</button>
-              </buttons>
-            ) : ( 
-              <buttons>
-                <button>Signup</button>
-                <button>Login</button> 
-              </buttons>
-            )}
-        </section>
-    );
+const defaultProps = {
+  isLoggedIn: false,
+  user: undefined,
+};
+
+function UserSection({ isLoggedIn, user }) {
+  return (
+    <section>
+      {user &&
+        <span>Hi {user}</span>
+      }
+      {isLoggedIn ? (
+        <buttons>
+          <button>Add Talk</button>
+          <button>Logout</button>
+        </buttons>
+      ) : (
+        <buttons>
+          <button>Signup</button>
+          <button>Login</button>
+        </buttons>
+      )}
+    </section>
+  );
 }
 
 UserSection.propTypes = propTypes;

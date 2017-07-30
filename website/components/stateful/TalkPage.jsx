@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import talksData from 'website/mocks/talks.json';
 
 class TalkPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            talk: talksData[0],
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      talk: talksData[0],
+    };
+  }
 
   render() {
     return (
