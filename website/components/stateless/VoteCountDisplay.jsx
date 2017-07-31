@@ -5,7 +5,7 @@ import VoteArrow from 'website/components/stateless/VoteArrow';
 
 const propTypes = {
   tally: PropTypes.number,
-  userChoice: PropTypes.bool,
+  userChoice: PropTypes.string,
 };
 
 const defaultProps = {

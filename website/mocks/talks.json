@@ -9,7 +9,27 @@
         "modified": "2017-07-23T02:11:17.787211Z",
         "userVote": "+1",
         "videoUrl": "https://www.youtube.com/embed/OSGv2VnC0go",
-        "voteTally": "13"
+        "voteTally": 13,
+        "comments": [
+          {
+            "id": 1,
+            "content": "Great stuff",
+            "user": "Supporter 1",
+            "created": "2017-07-23T02:11:17.787178Z"
+          },
+          {
+            "id": 2,
+            "content": "Super duper",
+            "user": "Supporter 2",
+            "created": "2017-07-23T02:13:17.787178Z"
+          },
+          {
+            "id": 3,
+            "content": "I know right?",
+            "user": "Supporter 1",
+            "created": "2017-07-23T02:18:17.787178Z"
+          }
+        ]
     },
     {
         "id": 2,
@@ -21,6 +41,26 @@
         "modified": "2017-07-23T02:11:56.161065Z",
         "userVote": null,
         "videoUrl": "https://www.youtube.com/embed/OSGv2VnC0go",
-        "voteTally": "8"
+        "voteTally": 8,
+        "comments": [
+          {
+            "id": 1,
+            "content": "Awful,stuff",
+            "user": "Supporter 1",
+            "created": "2017-07-23T02:11:17.787178Z"
+          },
+          {
+            "id": 2,
+            "content": "Super gross",
+            "user": "Supporter 2",
+            "created": "2017-07-23T02:13:17.787178Z"
+          },
+          {
+            "id": 3,
+            "content": "I know right?",
+            "user": "Supporter 1",
+            "created": "2017-07-23T02:18:17.787178Z"
+          }
+        ]
     }
 ]

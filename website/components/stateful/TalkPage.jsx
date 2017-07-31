@@ -4,6 +4,7 @@ import talksData from 'website/mocks/talks.json';
 import TalkDetails from 'website/components/stateless/TalkDetails';
 import TalkOverview from 'website/components/stateless/TalkOverview';
 import VoteCountDisplay from 'website/components/stateless/VoteCountDisplay';
+import CommentList from 'website/components/stateless/CommentList';
 
 class TalkPage extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class TalkPage extends Component {
           videoUrl={this.state.talk.videoUrl}
         />
         <VoteCountDisplay tally={this.state.talk.voteTally} userChoice={this.state.talk.userVote} />
+        <CommentList comments={this.state.talk.comments} />
       </div>
     );
   }
