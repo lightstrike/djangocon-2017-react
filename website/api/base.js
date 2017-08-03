@@ -1,4 +1,3 @@
-// @flow
 import fetch from 'isomorphic-fetch';
 
 function getCsrfToken() {

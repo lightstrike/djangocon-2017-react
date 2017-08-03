@@ -1,4 +1,5 @@
 import camelCase from 'lodash/camelCase';
+import snakeCase from 'lodash/snakeCase';
 
 export function apiToReduxFormat(myObject) {  // eslint-disable-line import/prefer-default-export
   /**
@@ -33,4 +34,19 @@ export function apiToReduxFormat(myObject) {  // eslint-disable-line import/pref
     id: myObject.id,
     data: newObject,
   };
+}
+
+
+export function reduxToApiFormat(myObject) {
+  /**
+   * Takes an object and converts all keys at the top level from camelCase to snake_case
+   */
+  const newObject = {};
+  const camelKeys = Object.keys(myObject);
+
+  for (let i = 0; i < camelKeys; i += 1) {
+    const camelKey = camelKeys[i];
+    newObject[snakeCase[camelKey]] = myObject[camelKey];
+  }
+  return newObject;
 }
