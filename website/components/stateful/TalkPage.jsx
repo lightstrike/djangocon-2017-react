@@ -12,6 +12,7 @@ import { getTalk } from 'website/redux/talk';
 class TalkPage extends Component {
   static propTypes = {
     getTalkById: PropTypes.func.isRequired,
+    talkStore: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
   };
 
@@ -24,14 +25,14 @@ class TalkPage extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { match, talkStore } = this.props;
-    if (talkStore.isLoading) {
+
+    if (talkStore.isLoading || !talkStore.byId[match.params.id]) {
       return (
         <div>Is loading</div>
-      )
+      );
     }
-    const talk = talkStore.byId[match.params.id]
+    const talk = talkStore.byId[match.params.id].data;
     return (
       <div>
         <TalkOverview talk={talk} />

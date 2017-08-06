@@ -8,19 +8,18 @@ export function apiToReduxFormat(myObject) {  // eslint-disable-line import/pref
    */
   const newObject = {};
   const snakeKeys = Object.keys(myObject);
-  for (let i = 0; i < snakeKeys; i += 1) {
+  for (let i = 0; i < snakeKeys.length; i += 1) {
     const snakeKey = snakeKeys[i];
     const camelCaseKey = camelCase(snakeKey);
-
     if (myObject[snakeKey] && typeof myObject[snakeKey] === 'object') {
       // the value for this key represents a FK or M2M relationship
       if (Array.isArray(myObject[snakeKey])) {
         // the value for this key represents a M2M relationship
         newObject[camelCaseKey] = myObject[snakeKey].map((value) => {
           if (typeof value === 'number') {
-            newObject[camelCaseKey] = value;
+            return value;
           }
-            newObject[camelCaseKey] = apiToReduxFormat(value);
+          return apiToReduxFormat(value);
         });
       } else {
         newObject[camelCaseKey] = apiToReduxFormat(myObject[snakeKey]);
