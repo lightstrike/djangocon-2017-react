@@ -1,23 +1,54 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import TalksList from 'website/components/stateless/TalksList';
-import talksData from 'website/mocks/talks.json';
+
+import { getMultipleTalks } from 'website/redux/talk';
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      talks: talksData,
-    };
+  static propTypes = {
+    getTalksList: PropTypes.func.isRequired,
+    talkStore: PropTypes.object.isRequired,
+    page: PropTypes.number,
+  };
+
+  static defaultProps = {
+    page: 1,
+  };
+
+  componentWillMount() {
+    const { page, getTalksList } = this.props;
+    getTalksList(page);
   }
 
   render() {
+    const { page, talkStore } = this.props;
+
+    if (talkStore.isLoading || !talkStore.byPage[page]) {
+      return (
+        <div>Is loading</div>
+      );
+    }
+
+    const talks = talkStore.byPage[page].data;
+
     return (
       <div>
-        <TalksList talks={this.state.talks} />
+        <TalksList talks={talks} />
       </div>
     );
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+  talkStore: state.talkStore,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getTalksList(page) {
+    dispatch(getMultipleTalks(page));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

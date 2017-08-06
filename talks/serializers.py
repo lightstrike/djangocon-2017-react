@@ -4,9 +4,14 @@ from .models import Comment, Talk, Vote
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
     class Meta:
         model = Comment
         fields = ('id', 'user', 'talk', 'content', 'created', 'modified')
+
+    def get_user(self, obj):
+        return obj.user.get_full_name()
 
 
 class VoteSerializer(serializers.ModelSerializer):
