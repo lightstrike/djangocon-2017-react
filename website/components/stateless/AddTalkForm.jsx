@@ -64,62 +64,77 @@ class AddTalkForm extends Component {
     const { title, speakerName, youtubeUrl, date, description } = this.state;
     return (
       <div>
-
-        <label htmlFor="title">Title</label>
-        <div>
-          <input
-            value={title}
-            name="title"
-            type="text"
-            placeholder="Title"
-            onChange={this.handleChange}
-          />
+        <div className="form-group row">
+          <label className="col-2 col-form-label" htmlFor="title">Title</label>
+          <div className="col-10">
+            <input
+              className="form-control"
+              value={title}
+              name="title"
+              type="text"
+              placeholder="Title"
+              onChange={this.handleChange}
+            />
+          </div>
         </div>
 
-        <label htmlFor="speakerName">Speaker Name</label>
-        <div>
-          <input
-            value={speakerName}
-            name="speakerName"
-            type="text"
-            placeholder="Speaker name"
-            onChange={this.handleChange}
-          />
+        <div className="form-group row">
+          <label className="col-2 col-form-label" htmlFor="speakerName">Speaker Name</label>
+          <div className="col-10">
+            <input
+              className="form-control"
+              value={speakerName}
+              name="speakerName"
+              type="text"
+              placeholder="Speaker name"
+              onChange={this.handleChange}
+            />
+          </div>
         </div>
 
-        <label htmlFor="youtubeUrl">YouTube URL</label>
-        <div>
-          <input
-            value={youtubeUrl}
-            name="youtubeUrl"
-            type="text"
-            placeholder="YouTube URL"
-            onChange={this.handleChange}
-          />
+        <div className="form-group row">
+          <label className="col-2 col-form-label" htmlFor="youtubeUrl">YouTube URL</label>
+          <div className="col-10">
+            <input
+              className="form-control"
+              value={youtubeUrl}
+              name="youtubeUrl"
+              type="text"
+              placeholder="YouTube URL"
+              onChange={this.handleChange}
+            />
+          </div>
         </div>
 
-        <label htmlFor="date">Date</label>
-        <div>
-          <input
-            value={date}
-            name="date"
-            type="date"
-            placeholder="Date"
-            onChange={this.handleChange}
-          />
+        <div className="form-group row">
+          <label className="col-2 col-form-label" htmlFor="date">Date</label>
+          <div className="col-10">
+            <input
+              className="form-control"
+              value={date}
+              name="date"
+              type="date"
+              placeholder="Date"
+              onChange={this.handleChange}
+            />
+          </div>
         </div>
 
-        <label htmlFor="description">Description</label>
-        <div>
-          <textarea
-            value={description}
-            name="description"
-            rows="4"
-            placeholder="Description"
-            onChange={this.handleChange}
-          />
+        <div className="form-group row">
+          <label className="col-2 col-form-label" htmlFor="description">Description</label>
+          <div className="col-10">
+            <textarea
+              className="form-control"
+              value={description}
+              name="description"
+              rows="4"
+              placeholder="Description"
+              onChange={this.handleChange}
+            />
+          </div>
         </div>
         <button
+          className="btn btn-success"
           type="submit"
           disabled={!this.validTalk()}
           onClick={this.submitTalk}
