@@ -8,6 +8,9 @@ import talkSchema from 'website/api/schemas/talkSchema';
  * Action Constants
  */
 // GET
+const GET_TALK_REQUEST = 'talk/GET_TALK_REQUEST';
+const GET_TALK_SUCCESS = 'talk/GET_TALK_SUCCESS';
+const GET_TALK_FAILURE = 'talk/GET_TALK_FAILURE';
 const GET_MULTIPLE_TALKS_REQUEST = 'talk/GET_MULTIPLE_TALKS_REQUEST';
 const GET_MULTIPLE_TALKS_SUCCESS = 'talk/GET_MULTIPLE_TALKS_SUCCESS';
 const GET_MULTIPLE_TALKS_FAILURE = 'talk/GET_MULTIPLE_TALKS_FAILURE';
@@ -30,12 +33,15 @@ const defaultState = {
 };
 export function reducer(state = defaultState, action) {
   switch (action.type) {
+    case GET_TALK_REQUEST:
     case GET_MULTIPLE_TALKS_REQUEST:
     case POST_TALK_REQUEST: {
       return Object.assign({}, state, {
         loading: state.loading + 1,
       });
     }
+    case GET_TALK_SUCCESS:
+    case GET_TALK_FAILURE:
     case GET_MULTIPLE_TALKS_SUCCESS:
     case GET_MULTIPLE_TALKS_FAILURE:
     case POST_TALK_SUCCESS:
@@ -74,6 +80,34 @@ export function reducer(state = defaultState, action) {
 /**
  * Normal (i.e. non-thunk / non-async) Action Creators
  */
+function getTalkRequest(talkId) {
+  return {
+    type: GET_TALK_REQUEST,
+    payload: {
+      talkId,
+    },
+  };
+}
+
+function getTalkSuccess(talkId) {
+  return {
+    type: GET_TALK_SUCCESS,
+    payload: {
+      talkId,
+    },
+  };
+}
+
+function getTalkFailure(talkId, status) {
+  return {
+    type: GET_TALK_FAILURE,
+    payload: {
+      talkId,
+      status,
+    },
+  };
+}
+
 function getMultipleTalksRequest(page) {
   return {
     type: GET_MULTIPLE_TALKS_REQUEST,
@@ -155,6 +189,33 @@ function receiveMultipleTalks(talks, page) {
 /**
  * Async (i.e. thunk / saga) Action Creators
  */
+export function getTalk(talkId, forceRequest = false) {
+  return function getTalkThunk(dispatch, getState) {
+    if (typeof getState().talkStore.byId[talkId] === 'object' && forceRequest === false) {
+      // if we know the objects are already in the store, don't hit the db again
+      // (unless we explecitly want to, i.e. "force")
+      return null;
+    }
+    dispatch(getTalkRequest(talkId));
+    return get(`api/v1/talks/${talkId}/`)
+      .then((response) => {
+        if (response.status === 200) {
+          // when we get a 200 response (i.e. everything works as expected)
+          response.json()
+            .then(json => dispatch(receiveTalk(json)))
+            .then(() => dispatch(getTalkSuccess(talkId)));
+          // not a 200 response
+          dispatch(getTalkFailure(talkId, response.status));
+        }
+      })
+      .catch(() => {
+        // this happens when an error we didn't / account for occurs
+        // (all other errors SHOULD be caught in the above block)
+        dispatch(getTalkFailure(talkId, 520));
+      });
+  };
+}
+
 export function getMultipleTalks(page = 1, forceRequest = false) {
   return function getMultipleTalksThunk(dispatch, getState) {
     if (getState().talkStore.byPage[page] && forceRequest === false) {
