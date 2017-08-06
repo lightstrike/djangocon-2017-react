@@ -31,6 +31,13 @@ class UserViewSet(viewsets.ModelViewSet):
     Viewset for retrieving an individual or set of users,
     plus updating and deleting individual users.
     """
+    def initialize_request(self, request, *args, **kwargs):
+        if 'pk' in kwargs:
+            if kwargs['pk'] == 'me':
+                kwargs['pk'] = request.user.id
+
+        return super(UserViewSet, self).initialize_request(request, *args, **kwargs)
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_fields = ('id', 'email', 'first_name', 'last_name', 'is_active',)
