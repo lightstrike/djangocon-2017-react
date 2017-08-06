@@ -24,13 +24,11 @@ class HomePage extends Component {
 
   render() {
     const { page, talkStore } = this.props;
-
     if (talkStore.isLoading || !talkStore.byPage[page]) {
       return (
         <div>Is loading</div>
       );
     }
-
     const talks = talkStore.byPage[page].data;
 
     return (

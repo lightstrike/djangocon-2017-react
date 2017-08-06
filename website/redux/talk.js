@@ -68,7 +68,7 @@ export function reducer(state = defaultState, action) {
         },
         byPage: {
           ...state.byPage,
-          [payload.page]: payload.talk.map(talk => talk.id),
+          [payload.page]: Object.keys(payload.talk).map(key => payload.talk[key].id),
         },
       });
     }
@@ -174,7 +174,7 @@ function receiveTalk(talk) {
 
 function receiveMultipleTalks(talks, page) {
   // step 1: ensure the incoming object follows js ideoms (camelCase keys and such)
-  const reduxTalks = apiToReduxFormat(talks);
+  const reduxTalks = talks.map(talk => apiToReduxFormat(talk));
 
   // step 2: normalize (i.e. flatten) the the incoming object
   const normalizedTalks = normalize(reduxTalks, [talkSchema]);
@@ -235,6 +235,7 @@ export function getMultipleTalks(page = 1, forceRequest = false) {
           response.json()
             .then(json => dispatch(receiveMultipleTalks(json, page)))
             .then(() => dispatch(getMultipleTalksSuccess(page)));
+        } else {
           // not a 200 response
           dispatch(getMultipleTalksFailure(page, response.status));
         }
