@@ -156,10 +156,13 @@ function postTalkFailure() {
 
 function receiveTalk(talk) {
   // step 1: ensure the incoming object follows js ideoms (camelCase keys and such)
+  console.info('talk', talk);
   const reduxTalk = apiToReduxFormat(talk);
+  console.info('reduxTalk', reduxTalk);
 
   // step 2: normalize (i.e. flatten) the the incoming object
   const normalizedTalk = normalize(reduxTalk, talkSchema);
+  console.info('normalized', normalizedTalk);
 
   return {
     type: RECEIVE_TALK,
@@ -204,6 +207,7 @@ export function getTalk(talkId, forceRequest = false) {
           response.json()
             .then(json => dispatch(receiveTalk(json)))
             .then(() => dispatch(getTalkSuccess(talkId)));
+        } else {
           // not a 200 response
           dispatch(getTalkFailure(talkId, response.status));
         }

@@ -18,9 +18,9 @@ export function apiToReduxFormat(myObject) {  // eslint-disable-line import/pref
         // the value for this key represents a M2M relationship
         newObject[camelCaseKey] = myObject[snakeKey].map((value) => {
           if (typeof value === 'number') {
-            return value;
+            newObject[camelCaseKey] = value;
           }
-          return apiToReduxFormat(value);
+            newObject[camelCaseKey] = apiToReduxFormat(value);
         });
       } else {
         newObject[camelCaseKey] = apiToReduxFormat(myObject[snakeKey]);

@@ -32,7 +32,7 @@ class App extends Component {
           <Header heading="Great Django Talks" />
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/:slug" component={TalkPage} />
+            <Route path="/:id" component={TalkPage} />
           </Switch>
           <Footer />
         </div>
