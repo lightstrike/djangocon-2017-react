@@ -23,8 +23,9 @@ class TalkSerializer(serializers.ModelSerializer):
     user_vote = serializers.SerializerMethodField()
 
     def get_comments(self, obj):
-        first_10_comments = Comment.objects.filter(talk=obj)[:10]
-        return CommentSerializer(first_10_comments, many=True).data
+        most_recent_10_comments = Comment.objects.filter(
+            talk=obj).order_by('-id')[:10]
+        return CommentSerializer(most_recent_10_comments, many=True).data
 
     def get_downvotes(self, obj):
         return Vote.objects.filter(
@@ -44,11 +45,13 @@ class TalkSerializer(serializers.ModelSerializer):
         request = self.context['request']
         user_object = request.user
         if user_object.is_authenticated():
-            user_vote = Vote.objects.filter(
-                user=user_object,
-                talk=obj)
-            if user_vote.exists():
-                return user_vote.first().vote
+            try:
+                user_vote = Vote.objects.get(
+                    user=user_object,
+                    talk=obj)
+                return user_vote.vote
+            except Vote.DoesNotExist:
+                return None
         return None
 
     class Meta:

@@ -72,6 +72,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'comment'
         verbose_name_plural = 'comments'
+        ordering = ['-id']
 
     def __str__(self):
         return f'{self.user} comment on {self.talk} at {self.created}'
