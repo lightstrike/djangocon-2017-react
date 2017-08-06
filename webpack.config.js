@@ -19,6 +19,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
       },
+      // {
+      //   test: /\.(png|jpg|gif)$/,
+      //   loader: 'file-loader',
+      // },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
