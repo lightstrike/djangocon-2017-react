@@ -13,6 +13,8 @@ import HomePage from 'website/components/stateful/HomePage';
 import TalkPage from 'website/components/stateful/TalkPage';
 import Footer from 'website/components/stateless/Footer';
 
+import AddTalkForm from 'website/components/stateless/AddTalkForm';
+
 const mapDispatchToProps = dispatch => ({
   getSelf() {
     dispatch(getUser('me'));
@@ -32,6 +34,7 @@ class App extends Component {
           <Header heading="Great Django Talks" />
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/add-talk" component={AddTalkForm} />
             <Route path="/:slug" component={TalkPage} />
           </Switch>
           <Footer />

@@ -187,6 +187,7 @@ export function postTalk(body) {
   return function postTalkThunk(dispatch) {
     dispatch(postTalkRequest());
     const apiBody = reduxToApiFormat(body);
+    console.log(apiBody);
 
     return post('api/v1/talks/', apiBody)
       .then((response) => {

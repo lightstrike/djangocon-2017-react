@@ -43,10 +43,9 @@ export function reduxToApiFormat(myObject) {
    */
   const newObject = {};
   const camelKeys = Object.keys(myObject);
-
-  for (let i = 0; i < camelKeys; i += 1) {
+  for (let i = 0; i < camelKeys.length; i += 1) {
     const camelKey = camelKeys[i];
-    newObject[snakeCase[camelKey]] = myObject[camelKey];
+    newObject[snakeCase(camelKey)] = myObject[camelKey];
   }
   return newObject;
 }

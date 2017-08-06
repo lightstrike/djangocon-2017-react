@@ -1,89 +1,143 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+
+import { postTalk } from 'website/redux/talk';
 
 const propTypes = {
-  handleSubmit: PropTypes.func,
-  submitting: PropTypes.bool,
+  submitTalk: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-  handleSubmit: null,
-  submitting: false,
-};
+const defaultProps = {};
 
-function AddTalkForm({ handleSubmit, submitting }) {
-  return (
-    <form onSubmit={handleSubmit}>
+const mapDispatchToProps = dispatch => ({
+  submitTalk(body) {
+    dispatch(postTalk(body));
+  },
+});
+
+class AddTalkForm extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      speakerName: '',
+      youtubeUrl: '',
+      date: '',
+      description: '',
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  submitTalk = () => {
+    const { submitTalk } = this.props;
+    const { title, speakerName, youtubeUrl, date, description } = this.state;
+
+    const body = {
+      title,
+      speakerName,
+      youtubeUrl,
+      date,
+      description,
+    };
+
+    submitTalk(body);
+  }
+
+  validTalk = () => {
+    const { title, speakerName, youtubeUrl, date, description } = this.state;
+    if (!title || !speakerName || !youtubeUrl || !date || !description) {
+      return false;
+    }
+    return true;
+  }
+
+  render() {
+    const { title, speakerName, youtubeUrl, date, description } = this.state;
+    return (
       <div>
+
         <label htmlFor="title">Title</label>
         <div>
-          <Field
-            id="title"
+          <input
+            value={title}
             name="title"
-            component="input"
             type="text"
             placeholder="Title"
+            onChange={this.handleChange}
           />
         </div>
-      </div>
-      <div>
+
         <label htmlFor="speakerName">Speaker Name</label>
         <div>
-          <Field
-            id="speakerName"
+          <input
+            value={speakerName}
             name="speakerName"
-            component="input"
             type="text"
-            placeholder="Speaker Name"
+            placeholder="Speaker name"
+            onChange={this.handleChange}
           />
         </div>
-      </div>
-      <div>
-        <label htmlFor="youtubeUrl">Youtube URL</label>
+
+        <label htmlFor="youtubeUrl">YouTube URL</label>
         <div>
-          <Field
-            id="youtubeUrl"
+          <input
+            value={youtubeUrl}
             name="youtubeUrl"
-            component="input"
-            type="url"
-            placeholder="Youtube URL"
+            type="text"
+            placeholder="YouTube URL"
+            onChange={this.handleChange}
           />
         </div>
-      </div>
-      <div>
+
         <label htmlFor="date">Date</label>
         <div>
-          <Field
-            id="date"
+          <input
+            value={date}
             name="date"
-            component="input"
             type="date"
             placeholder="Date"
+            onChange={this.handleChange}
           />
         </div>
-      </div>
-      <div>
-        <label htmlFor="Description">Description</label>
+
+        <label htmlFor="description">Description</label>
         <div>
-          <Field
-            id="description"
+          <textarea
+            value={description}
             name="description"
-            component="textarea"
-            type="text"
+            rows="4"
             placeholder="Description"
+            onChange={this.handleChange}
           />
         </div>
+        <button
+          type="submit"
+          disabled={!this.validTalk()}
+          onClick={this.submitTalk}
+        >
+          Add Talk
+        </button>
+
       </div>
-      <button type="submit" disabled={submitting}>Add Talk</button>
-    </form>
-  );
+    );
+  }
 }
 
 AddTalkForm.propTypes = propTypes;
 AddTalkForm.defaultProps = defaultProps;
 
-export default reduxForm({
-  form: 'AddTalkForm',
-})(AddTalkForm);
+const ConnectedAddTalkForm = connect(
+  null,
+  mapDispatchToProps,
+)(AddTalkForm);
 
+export default ConnectedAddTalkForm;
