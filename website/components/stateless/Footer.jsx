@@ -2,7 +2,10 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer><h3>Made with Love</h3></footer>
+    <footer>
+      <img src={'/django-logo-negative.png'} alt="Django logo" />
+      <h3>Made with Love</h3>
+    </footer>
   );
 }
 
