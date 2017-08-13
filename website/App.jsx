@@ -28,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="container">
           <Header heading="Great Django Talks" />
           <Switch>
             <Route exact path="/" component={HomePage} />

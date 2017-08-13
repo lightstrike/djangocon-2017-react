@@ -19,6 +19,21 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
       },
+      // {
+      //   test: /\.(png|jpg|gif)$/,
+      //   loader: 'file-loader',
+      // },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {

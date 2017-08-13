@@ -23,11 +23,13 @@ class Header extends Component {
 
   render() {
     return (
-      <nav>
-        <Link to="/">
-          <h3>{this.props.heading}</h3>
-        </Link>
-        <UserSection isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
+      <nav className="navbar navbar-inverse navbar-toggleable-md row" style={{ backgroundColor: '#092E20' }}>
+        <ul className="nav navbar-nav col-md-12">
+          <li className="nav-item col-md-4">
+            <Link to="/">{this.props.heading}</Link>
+          </li>
+          <UserSection isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
+        </ul>
       </nav>
     );
   }

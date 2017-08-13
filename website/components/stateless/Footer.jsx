@@ -1,8 +1,13 @@
 import React from 'react';
 
+const djangoLogo = require('website/build/django-logo-negative.png');
+
 function Footer() {
   return (
-    <footer><h3>Made with Love</h3></footer>
+    <footer>
+      <img src={djangoLogo} alt="Django logo" />
+      <h3>Made with Love</h3>
+    </footer>
   );
 }
 

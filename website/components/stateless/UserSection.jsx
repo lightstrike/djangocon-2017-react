@@ -13,22 +13,22 @@ const defaultProps = {
 
 function UserSection({ isLoggedIn, user }) {
   return (
-    <section>
+    <li className="nav-item col-md-4 push-md-4">
       {user &&
-        <span>Hi {user}</span>
+        <span className="nav-item">Hi {user}</span>
       }
       {isLoggedIn ? (
-        <buttons>
-          <button>Add Talk</button>
-          <button>Logout</button>
-        </buttons>
+        <span className="nav-item">
+          <button className="btn btn-success">Add Talk</button>
+          <button className="btn btn-secondary">Logout</button>
+        </span>
       ) : (
-        <buttons>
-          <button>Signup</button>
-          <button>Login</button>
-        </buttons>
+        <span className="nav-item">
+          <button className="btn btn-success">Signup</button>
+          <button className="btn btn-info">Login</button>
+        </span>
       )}
-    </section>
+    </li>
   );
 }
 
